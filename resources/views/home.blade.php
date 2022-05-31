@@ -1,122 +1,65 @@
-@extends('layouts.ont')
-
-
-
-
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@section('title')
-    TELKOM WITEL SUMBAR
-@endsection
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.6.2/animate.min.css" rel="stylesheet">
+    <!-- Eksternal CSS -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{!! asset('css/style.css') !!}"> 
-</head>
-<body>
-@section('content')
-<header>
+    <!-- Animation -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 
-        <!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Franco</a>
-                </div>
+    <title>PT TELKOM</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    @include('layouts.nav') 
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- Carousel -->
+    <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+		<div class="carousel-indicators">
+			<button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
+		</div>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/background1.png') }}">
+				<div class="carousel-caption">
+					<h5 class="animated bounceInRight" style="animation-delay: 1s">Web Design</h5>
+					<p class="animated bounceInLeft d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/background2.jpg') }}">
+				<div class="carousel-caption">
+					<h5 class="animated slideInDown" style="animation-delay: 1s">Graphics Design</h5>
+					<p class="animated fadeInUp d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/background3.jpg') }}">
+				<div class="carousel-caption">
+					<h5 class="animated zoomIn" style="animation-delay: 1s">Photography</h5>
+					<p class="animated fadeInLeft d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+				</div>
+			</div>
+		</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> <span class="visually-hidden">Previous</span></button> <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> <span class="visually-hidden">Next</span></button>
+	</div>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">portfolio</a></li>
-                        <li><a href="#">services</a></li>
-                        <li><a href="#">contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav> -->
-        
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <!-- <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <div class="banner" style="background-image: url(https://i.postimg.cc/pTGKnyy0/1.jpg);"></div>
-                    <div class="carousel-caption">
-                        <h2 class="animated bounceInRight" style="animation-delay: 1s">We Are <span>Creative</span></h2>
-                        <h3 class="animated bounceInLeft" style="animation-delay: 2s">Web Design and Development Agency</h3>
-                        <p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">CHECK IT OUT!</a></p>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="banner" style="background-image: url(https://i.postimg.cc/k4Bvsxrr/2.jpg);"></div>
-                    <div class="carousel-caption">
-                        <h2 class="animated slideInDown" style="animation-delay: 1s">We Are <span>Franco</span></h2>
-                        <h3 class="animated fadeInUp" style="animation-delay: 2s">Web Design and Development Agency</h3>
-                        <p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Contact us</a></p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-    </header>
-
-
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-@endsection
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
 </html>
-
