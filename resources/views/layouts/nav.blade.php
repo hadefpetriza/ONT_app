@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
-			<a class="navbar-brand fw-bold" href="#">
+			<a class="navbar-brand fw-bold" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" height="24" class="d-inline-block align-text-top">
                 PT TELEKOMUNIKASI INDONESIA
             </a> 
@@ -13,7 +13,7 @@
                         <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('index') }}">Optical Network Terminal (ONT)</a>
+                        <a class="nav-link" href="{{ route('ont.show') }}">Optical Network Terminal (ONT)</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

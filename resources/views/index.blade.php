@@ -66,7 +66,13 @@
                           <td>{{ $x->sn_ont }}</td>
                           <td>{{ $x->site_id }}</td>
                           <td>{{ $x->type }}</td>
-                          <td>{{ $x->status }}</td>
+                          @if ($x->status === 0)
+                            <td><span class="badge bg-danger">Offline</span></td>
+                          @elseif($x->status === 1)
+                            <td><span class="badge bg-success">Online</span></td>
+                          @elseif($x->status === NULL)
+                            <td></td>
+                          @endif
                           <td>
                             <a type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
                               <i class="fa-solid fa-pen-to-square"></i> 
@@ -196,7 +202,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function () {
-          $('#ont_table').DataTable();
+          $('#ont_table').dataTable({
+            "lengthChange": false,
+            "pageLength": 6,
+          });
+      
       });
 
       // submit form ONT
@@ -213,6 +223,7 @@
             $.ajax({
               url: "{{ route('ont.add') }}",
               type: "POST",
+              dataType: "json",
               data: {
                 ip_address:ip_address,
                 sn_ont:sn_ont,
@@ -223,59 +234,68 @@
               },
               success: function(response){
                 $('#addModal').modal('hide');
-                Swal.fire({
-                  icon: 'success',
-                  title: 'Berhasil',
-                  text: 'Data ONT Berhasil Ditambahkan',
-                });
-              },
-              error: function(error){
-                $('#addModal').modal('hide');
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Gagal',
-                  text: 'Data ONT Gagal Ditambahkan',
-                });
+                if(response.status == 200)
+                {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Data ONT Berhasil Ditambahkan',
+                  });
+                }
+                else if(response.status == 400)
+                {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Data ONT Gagal Ditambahkan',
+                 });
+                } 
               }
-
             });
           });
 
-          // delete data ONT
-          function deleteBtn(id_ont){
-            Swal.fire({
-              title: 'Anda yakin ingin menghapus?',
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Ya, Hapus!',
-              cancelButtonText: 'Batalkan'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                $.ajax({
-                  url: '/ont/'+id_ont,
-                  type: 'DELETE',
-                  data: {
-                    _token: $('input[name=_token]').val()
-                  },
-                  success: function(response){
-                    Swal.fire({
-                      icon: 'success',
-                      title: 'Berhasil',
-                      text: 'Data ONT Berhasil Dihapus',
+      // delete data ONT
+      function deleteBtn(id_ont){
+        Swal.fire({
+          title: 'Anda yakin ingin menghapus?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Hapus!',
+          cancelButtonText: 'Batalkan'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: '/ont/'+id_ont,
+              type: 'DELETE',
+              data: {
+                _token: $('input[name=_token]').val()
+              },
+              success: function(response){
+                if(response.status == 200)
+                {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Data ONT Berhasil Ditambahkan',
+                  });
+                }
+                else if(response.status == 400)
+                {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Data ONT Gagal Ditambahkan',
                     });
-                    location.reload();
-                  },
-                });
-              }
-            })
+                } 
+                location.reload();
+              },
+            });
           }
-
+        })
+      }
       
-
-
-
     </script>
   </body>
 </html>
