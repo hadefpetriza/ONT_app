@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ONTController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,16 @@ use App\Http\Controllers\ONTController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/home', [ONTController::class, 'index'])->name('home');
+Route::get('/home', [ONTController::class, 'home'])->name('home');
+Route::get('/ont', [ONTController::class, 'index'])->name('index');
+Route::post('/ont', [ONTController::class, 'addONT'])->name('ont.add');
+Route::delete('/ont/{id_ont}', [ONTController::class, 'deleteONT'])->name('ont.del');
+
+
 

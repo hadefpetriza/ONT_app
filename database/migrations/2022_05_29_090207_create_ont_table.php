@@ -20,7 +20,7 @@ class CreateOntTable extends Migration
             $table->string('site_id', 15);
             $table->string('type', 20);
             $table->string('alamat', 100);
-            $table->integer('status');
+            $table->integer('status')->nullable();
             $table->unsignedBigInteger('modified_by');
             $table->timestamps();
 

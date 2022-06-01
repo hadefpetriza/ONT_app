@@ -35,26 +35,25 @@
 			<div class="carousel-item active">
 				<img alt="..." class="d-block w-100" src="{{ asset('images/2.jpg') }}">
 				<div class="carousel-caption">
-					<h5 class="animated bounceInRight" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
-					<p class="animated bounceInLeft d-none d-md-block" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR
-</p>
+					<h5 class="animated bounceInRight shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
+					<p class="animated bounceInLeft d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
 					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img alt="..." class="d-block w-100" src="{{ asset('images/1.jpg') }}">
 				<div class="carousel-caption">
-					<h5 class="animated slideInDown" style="animation-delay: 1s">Graphics Design</h5>
-					<p class="animated fadeInUp d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
-					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+					<h5 class="animated slideInDown shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
+					<p class="animated fadeInUp d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img alt="..." class="d-block w-100" src="{{ asset('images/4.jpg') }}">
 				<div class="carousel-caption">
-					<h5 class="animated zoomIn" style="animation-delay: 1s">Photography</h5>
-					<p class="animated fadeInLeft d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
-					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+					<h5 class="animated zoomIn shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
+					<p class="animated fadeInLeft d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
 				</div>
 			</div>
 		</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> <span class="visually-hidden">Previous</span></button> <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> <span class="visually-hidden">Next</span></button>
