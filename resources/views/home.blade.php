@@ -20,7 +20,7 @@
     <!-- Animation -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 
-    <title>PT TELKOM</title>
+    <title>PT TELKOM INDONESIA</title>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -33,15 +33,16 @@
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img alt="..." class="d-block w-100" src="{{ asset('images/background1.png') }}">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/2.jpg') }}">
 				<div class="carousel-caption">
-					<h5 class="animated bounceInRight" style="animation-delay: 1s">Web Design</h5>
-					<p class="animated bounceInLeft d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
-					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">Learn More</a></p>
+					<h5 class="animated bounceInRight" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
+					<p class="animated bounceInLeft d-none d-md-block" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR
+</p>
+					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="{{ asset('images/background2.jpg') }}">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/1.jpg') }}">
 				<div class="carousel-caption">
 					<h5 class="animated slideInDown" style="animation-delay: 1s">Graphics Design</h5>
 					<p class="animated fadeInUp d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
@@ -49,7 +50,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img alt="..." class="d-block w-100" src="{{ asset('images/background3.jpg') }}">
+				<img alt="..." class="d-block w-100" src="{{ asset('images/4.jpg') }}">
 				<div class="carousel-caption">
 					<h5 class="animated zoomIn" style="animation-delay: 1s">Photography</h5>
 					<p class="animated fadeInLeft d-none d-md-block" style="animation-delay: 2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
