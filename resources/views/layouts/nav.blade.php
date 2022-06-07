@@ -13,7 +13,7 @@
                         <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ont.show') }}">Optical Network Terminal (ONT)</a>
+                        <a class="nav-link" href="{{ route('ont.index') }}">Optical Network Terminal (ONT)</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

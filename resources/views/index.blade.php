@@ -67,7 +67,7 @@
                <div class="py-3 px-3 border_top" style="background-color:white">
                   <!-- Title -->
                   <h4 style="display: inline-block;">Terminal</h4>
-                  <button class="btn btn-warning btn-sm float-end mb-3"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+                  <button class="btn btn-warning btn-sm float-end mb-3" onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></button>
 
                   <!-- Konten -->
 
@@ -179,9 +179,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function () {
-          readONT();
+          sleep(2000).then(() => { readONT(); });
       });
 
+      // put sleep
+      function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      // show data ONT
       function readONT(){
         var table = $('#ont_table').DataTable({
             "lengthChange": false,
@@ -223,7 +229,6 @@
             ]
           });
       }
-
       // submit form ONT
       $('#ontForm').on('submit', function(e){
             e.preventDefault();
@@ -319,7 +324,6 @@
           }
         })
       }
-
       // show edit data ONT
       function editBtn(id_ont){
         $.ajax({
@@ -337,7 +341,6 @@
           }
         });
       }
-
       //submit update data ONT
       $('#ontEditForm').on('submit', function(e){
             e.preventDefault();

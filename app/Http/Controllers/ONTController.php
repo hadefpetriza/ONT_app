@@ -31,19 +31,69 @@ class ONTController extends Controller
     protected function ping($ip){
         exec("ping -n 1 $ip", $output);
 
+        // if(!isset($output[2])){
+        //     pingTextInfo($output[0]);
+        // }
+        // else{
+        //     pingTextInfo($output[2]);
+        // }
+
         $response = strtolower(implode(' ', $output));
         $response = preg_match('/request timed out/', $response) || preg_match('/failure/i', $response) || preg_match('/host unreachable/i', $response) || preg_match('/could not find host/i', $response);
-
         return $response;
     }
 
+    protected function pingTextInfo($output){
+
+    }
+
     protected function updateStatusONT($id_ont, $status){
-        
         $query = Ont::where('id_ont', $id_ont)->update(['status' => $status]);
         return $query;
     }
 
-    public function index()
+    protected function sendMessage($pesan){
+        $id_bot = "1085134261";
+        $id_channel = "-1001671394161";
+        file_get_contents("https://api.telegram.org/bot5291921285:AAEclD2Kf8WZiV46eWYMiC6zYVApxs_YY68/sendMessage?chat_id=$id_channel&text=$pesan");
+    }
+
+    public function index(){
+        $data = Ont::get();
+        if(!empty($data)){
+            foreach($data as $ont){
+                $id_ont = $ont['id_ont'];
+                $ip_ont = $ont['ip_address_ont'];
+                $sn_ont = $ont['sn_ont'];
+                $site_id = $ont['site_id'];
+                $type = $ont['type'];
+                $alamat = $ont['alamat'];
+                $last = $ont['updated_at'];
+
+                if($this->ping($ip_ont) == true){
+                    $status = 0;
+                    if($this->updateStatusONT($id_ont, $status) > 0){
+                        $text = <<<EOT
+                        INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Offline%0ALast Update : %0A$last
+                        EOT;
+                        $this->sendMessage($text);
+                    }
+                }
+                else{
+                    $status = 1;
+                    if($this->updateStatusONT($id_ont, $status) > 0){
+                        $text = <<<EOT
+                        INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Online%0ALast Update : %0A$last
+                        EOT;
+                        $this->sendMessage($text);
+                    }
+                }
+            }
+        }
+        return view('index');
+    }
+
+    public function getONT()
     {
         $data = Ont::get();
         if($data){
@@ -57,25 +107,6 @@ class ONTController extends Controller
                 'status'=>400,
             ]);
         }
-        
-        // if(!empty($data)){
-        //     foreach($data as $x){
-        //         if($this->ping($x['id_ont'])){
-        //             $status = 0;
-        //             if($x['status'] != $status){
-        //                 $this->updateStatusONT($x['id_ont'], $status);
-        //             }
-        //         }
-        //         else{
-        //             $status = 1;
-        //             if($x['status'] != $status){
-        //                 $this->updateStatusONT($x['id_ont'], $status);
-        //             }
-        //         }
-        //     }
-        // }
-           
-        // return view('index', ["data"=>$data]);
     }
 
     public function addONT(Request $request)
