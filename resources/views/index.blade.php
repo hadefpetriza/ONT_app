@@ -114,19 +114,19 @@
               @csrf
               <div class="mb-2">
                 <label for="ip_address" class="form-label">IP Address</label>
-                <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Masukkan IP Address">
+                <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Masukkan IP Address" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label for="sn_ont" class="form-label">Serial Number ONT</label>
-                <input type="text" class="form-control" id="sn_ont" name="sn_ont" placeholder="Masukkan Serial Number ONT">
+                <input type="text" class="form-control" id="sn_ont" name="sn_ont" placeholder="Masukkan Serial Number ONT" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label for="site_id" class="form-label">Site ID</label>
-                <input type="text" class="form-control" id="site_id" name="site_id" placeholder="Masukkan Site ID">
+                <input type="text" class="form-control" id="site_id" name="site_id" placeholder="Masukkan Site ID" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label for="type" class="form-label">Tipe Produk</label>
-                <select class="form-select" id="type" aria-label="Tipe Produk" name="type">
+                <select class="form-select" id="type" aria-label="Tipe Produk" name="type" autocomplete="off">
                   <option selected disabled>Pilih tipe produk</option>
                   <option value="Astinet">Astinet</option>
                   <option value="Metro E">Metro Ethernet</option>
@@ -136,7 +136,7 @@
               </div>
               <div class="mb-2">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea class="form-control" placeholder="Masukkan Alamat" id="alamat" name="alamat" style="resize:none" rows="3"></textarea>
+                <textarea class="form-control" placeholder="Masukkan Alamat" id="alamat" name="alamat" autocomplete="off" style="resize:none" rows="3"></textarea>
               </div>
           </div>
             <div class="modal-footer">
@@ -157,21 +157,21 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="ontForm">
+            <form id="ontForm" class="ontForm">
               @csrf
-              <div class="mb-2">
+              <div class="mb-2 ontField">
                 <label for="ip_address" class="form-label">IP Address</label>
                 <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Masukkan IP Address">
               </div>
-              <div class="mb-2">
+              <div class="mb-2 ontField">
                 <label for="sn_ont" class="form-label">Serial Number ONT</label>
                 <input type="text" class="form-control" id="sn_ont" name="sn_ont" placeholder="Masukkan Serial Number ONT">
               </div>
-              <div class="mb-2">
+              <div class="mb-2 ontField">
                 <label for="site_id" class="form-label">Site ID</label>
                 <input type="text" class="form-control" id="site_id" name="site_id" placeholder="Masukkan Site ID">
               </div>
-              <div class="mb-2">
+              <div class="mb-2 ontField">
                 <label for="type" class="form-label">Tipe Produk</label>
                 <select class="form-select" id="type" aria-label="Tipe Produk" name="type">
                   <option selected disabled>Pilih tipe produk</option>
@@ -181,7 +181,7 @@
                   <option value="VPN">VPN</option>
                 </select>
               </div>
-              <div class="mb-2">
+              <div class="mb-2 ontField">
                 <label for="alamat" class="form-label">Alamat</label>
                 <textarea class="form-control" placeholder="Masukkan Alamat" id="alamat" name="alamat" style="resize:none" rows="3"></textarea>
               </div>
@@ -241,6 +241,11 @@
                     title: 'Berhasil',
                     text: 'Data ONT Berhasil Ditambahkan',
                   });
+                  $('#ip_address')[0].value = '';
+                  $('#sn_ont')[0].value = '';
+                  $('#site_id')[0].value = '';
+                  $('#alamat')[0].value = '';
+                  $('#type')[0].selectedIndex = 0;
                 }
                 else if(response.status == 400)
                 {
@@ -278,7 +283,7 @@
                   Swal.fire({
                     icon: 'success',
                     title: 'Berhasil',
-                    text: 'Data ONT Berhasil Ditambahkan',
+                    text: 'Data ONT Berhasil Dihapus',
                   });
                 }
                 else if(response.status == 400)
@@ -286,7 +291,7 @@
                   Swal.fire({
                     icon: 'error',
                     title: 'Gagal',
-                    text: 'Data ONT Gagal Ditambahkan',
+                    text: 'Data ONT Gagal Dihapus',
                     });
                 } 
                 location.reload();
