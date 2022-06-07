@@ -46,7 +46,18 @@ class ONTController extends Controller
     public function index()
     {
         $data = Ont::get();
-
+        if($data){
+            return response()->json([
+                'status'=>200,
+                'data' => $data,
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>400,
+            ]);
+        }
+        
         // if(!empty($data)){
         //     foreach($data as $x){
         //         if($this->ping($x['id_ont'])){
@@ -64,7 +75,7 @@ class ONTController extends Controller
         //     }
         // }
            
-        return view('index', ["data"=>$data]);
+        // return view('index', ["data"=>$data]);
     }
 
     public function addONT(Request $request)

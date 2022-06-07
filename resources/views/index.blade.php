@@ -58,30 +58,6 @@
                           <th>Aksi</th>
                       </tr>
                   </thead>
-                  <tbody>
-                    @foreach($data as $x)
-                      <tr>
-                          <td>{{ $loop->iteration }}</td>
-                          <td>{{ $x->ip_address_ont }}</td>
-                          <td>{{ $x->sn_ont }}</td>
-                          <td>{{ $x->site_id }}</td>
-                          <td>{{ $x->type }}</td>
-                          @if ($x->status === 0)
-                            <td><span class="badge bg-danger">Offline</span></td>
-                          @elseif($x->status === 1)
-                            <td><span class="badge bg-success">Online</span></td>
-                          @elseif($x->status === NULL)
-                            <td></td>
-                          @endif
-                          <td>
-                            <a href="javascript:void(0)" type="button" onclick="editBtn({{ $x->id_ont }})" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
-                              <i class="fa-solid fa-pen-to-square"></i> 
-                            </a>
-                            <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" onclick="deleteBtn({{ $x->id_ont }})"></i><a>
-                          </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
                </table>
                </div>
             </div>
@@ -189,7 +165,7 @@
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Tutup</button>
-              <button type="submit" class="btn btn-sm btn-danger">Update!</button>
+              <button type="submit" class="btn btn-sm btn-danger">Update</button>
             </div>
           </form>
         </div>
@@ -203,12 +179,50 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function () {
-          $('#ont_table').dataTable({
+          readONT();
+      });
+
+      function readONT(){
+        var table = $('#ont_table').DataTable({
             "lengthChange": false,
             "pageLength": 6,
+            "bDestroy": true,
+            "ajax": { 
+              url: "{{ route('ont.get') }}",
+            },
+            "columns": [
+              { "data" : null,
+                render: function (data, type, row, meta) {
+                  return meta.row + meta.settings._iDisplayStart + 1;
+              }  
+              },
+              { "data" : "ip_address_ont" },
+              { "data" : "sn_ont" },
+              { "data" : "site_id" },
+              { "data" : "type" },
+              { "data" : "status",
+                render: function(data, type, row){
+                  if(row.status === 0){
+                    return '<span class="badge bg-danger">Offline</span>';
+                  }
+                  else if(row.status === 1){
+                    return '<span class="badge bg-success">Online</span>';
+                  }
+                  else{
+                    return row.status;
+                  }
+                }
+              },
+              { "data" : null,
+                render: function(data, type, row){
+                  return `<a href="javascript:void(0)" type="button" onclick="editBtn(${row.id_ont})" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" onclick="deleteBtn(${row.id_ont})"></i><a>`;
+                }
+              },
+            ]
           });
-      
-      });
+      }
 
       // submit form ONT
       $('#ontForm').on('submit', function(e){
@@ -235,6 +249,7 @@
               },
               success: function(response){
                 $('#addModal').modal('hide');
+                readONT();
                 if(response.status == 200)
                 {
                   Swal.fire({
@@ -256,6 +271,8 @@
                   $('#site_id')[0].value = '';
                   $('#alamat')[0].value = '';
                   $('#type')[0].selectedIndex = 0;
+
+                  location.reload();
               }
             });
           });
@@ -280,6 +297,7 @@
                 _token: $('input[name=_token]').val()
               },
               success: function(response){
+                readONT();
                 if(response.status == 200)
                 {
                   Swal.fire({
@@ -296,7 +314,6 @@
                     text: 'Data ONT Gagal Dihapus',
                     });
                 } 
-                location.reload();
               },
             });
           }
@@ -347,6 +364,7 @@
               },
               success: function(response){
                 $('#editModal').modal('hide');
+                readONT();
                 if(response.status == 200)
                 {
                   Swal.fire({
