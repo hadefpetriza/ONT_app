@@ -74,7 +74,7 @@
                             <td></td>
                           @endif
                           <td>
-                            <a type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
+                            <a href="javascript:void(0)" type="button" onclick="editBtn({{ $x->id_ont }})" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
                               <i class="fa-solid fa-pen-to-square"></i> 
                             </a>
                             <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" onclick="deleteBtn({{ $x->id_ont }})"></i><a>
@@ -157,23 +157,24 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="ontForm" class="ontForm">
+            <form id="ontEditForm" class="ontEditForm">
               @csrf
-              <div class="mb-2 ontField">
+              <input type="hidden" class="form-control" id="id_ont" name="id_ont">
+              <div class="mb-2">
                 <label for="ip_address" class="form-label">IP Address</label>
-                <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Masukkan IP Address">
+                <input type="text" class="form-control" id="ip_address_e" name="ip_address" placeholder="Masukkan IP Address">
               </div>
-              <div class="mb-2 ontField">
+              <div class="mb-2">
                 <label for="sn_ont" class="form-label">Serial Number ONT</label>
-                <input type="text" class="form-control" id="sn_ont" name="sn_ont" placeholder="Masukkan Serial Number ONT">
+                <input type="text" class="form-control" id="sn_ont_e" name="sn_ont" placeholder="Masukkan Serial Number ONT">
               </div>
-              <div class="mb-2 ontField">
+              <div class="mb-2">
                 <label for="site_id" class="form-label">Site ID</label>
-                <input type="text" class="form-control" id="site_id" name="site_id" placeholder="Masukkan Site ID">
+                <input type="text" class="form-control" id="site_id_e" name="site_id" placeholder="Masukkan Site ID">
               </div>
-              <div class="mb-2 ontField">
+              <div class="mb-2">
                 <label for="type" class="form-label">Tipe Produk</label>
-                <select class="form-select" id="type" aria-label="Tipe Produk" name="type">
+                <select class="form-select" id="type_e" aria-label="Tipe Produk" name="type">
                   <option selected disabled>Pilih tipe produk</option>
                   <option value="Astinet">Astinet</option>
                   <option value="Metro E">Metro Ethernet</option>
@@ -181,14 +182,14 @@
                   <option value="VPN">VPN</option>
                 </select>
               </div>
-              <div class="mb-2 ontField">
+              <div class="mb-2">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea class="form-control" placeholder="Masukkan Alamat" id="alamat" name="alamat" style="resize:none" rows="3"></textarea>
+                <textarea class="form-control" placeholder="Masukkan Alamat" id="alamat_e" name="alamat" style="resize:none" rows="3"></textarea>
               </div>
           </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Tutup</button>
-              <button type="submit" class="btn btn-sm btn-danger">Simpan</button>
+              <button type="submit" class="btn btn-sm btn-danger">Update!</button>
             </div>
           </form>
         </div>
@@ -241,11 +242,6 @@
                     title: 'Berhasil',
                     text: 'Data ONT Berhasil Ditambahkan',
                   });
-                  $('#ip_address')[0].value = '';
-                  $('#sn_ont')[0].value = '';
-                  $('#site_id')[0].value = '';
-                  $('#alamat')[0].value = '';
-                  $('#type')[0].selectedIndex = 0;
                 }
                 else if(response.status == 400)
                 {
@@ -255,9 +251,15 @@
                     text: 'Data ONT Gagal Ditambahkan',
                  });
                 } 
+                  $('#ip_address')[0].value = '';
+                  $('#sn_ont')[0].value = '';
+                  $('#site_id')[0].value = '';
+                  $('#alamat')[0].value = '';
+                  $('#type')[0].selectedIndex = 0;
               }
             });
           });
+
 
       // delete data ONT
       function deleteBtn(id_ont){
@@ -300,6 +302,70 @@
           }
         })
       }
+
+      // show edit data ONT
+      function editBtn(id_ont){
+        $.ajax({
+          url: '/ont/'+id_ont,
+          type: "GET",
+          success: function(response) {
+              if(response[0]) {
+                $('#id_ont').val(response[0].id_ont);
+                $('#ip_address_e').val(response[0].ip_address_ont);
+                $('#sn_ont_e').val(response[0].sn_ont);
+                $('#site_id_e').val(response[0].site_id);
+                $('#type_e').val(response[0].type);
+                $('#alamat_e').val(response[0].alamat);
+            }
+          }
+        });
+      }
+
+      //submit update data ONT
+      $('#ontEditForm').on('submit', function(e){
+            e.preventDefault();
+
+            let id_ont = $('#id_ont').val();
+            let ip_address = $('#ip_address_e').val();
+            let sn_ont = $('#sn_ont_e').val();
+            let site_id = $('#site_id_e').val();
+            let type = $('#type_e').val();
+            let alamat = $('#alamat_e').val();
+            let _token = $('input[name=_token]').val();
+
+            $.ajax({
+              url: "{{ route('ont.update') }}",
+              type: "PUT",
+              data: {
+                id_ont:id_ont,
+                ip_address:ip_address,
+                sn_ont:sn_ont,
+                site_id:site_id,
+                type:type,
+                alamat:alamat,
+                _token:_token
+              },
+              success: function(response){
+                $('#editModal').modal('hide');
+                if(response.status == 200)
+                {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Data ONT Berhasil Diperbaharui',
+                  });
+                }
+                else if(response.status == 400)
+                {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Data ONT Gagal Diperbaharui',
+                 });
+                } 
+              }
+            });
+          });
       
     </script>
   </body>

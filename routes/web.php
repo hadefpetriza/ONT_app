@@ -27,6 +27,7 @@ Route::get('/home', [ONTController::class, 'home'])->name('home');
 Route::get('/ont', [ONTController::class, 'index'])->name('ont.show');
 Route::post('/ont', [ONTController::class, 'addONT'])->name('ont.add');
 Route::delete('/ont/{id_ont}', [ONTController::class, 'deleteONT'])->name('ont.del');
-
+Route::get('/ont/{id_ont}', [ONTController::class, 'showONT'])->name('ont.edit');
+Route::put('/ont', [ONTController::class, 'updateONT'])->name('ont.update');
 
 

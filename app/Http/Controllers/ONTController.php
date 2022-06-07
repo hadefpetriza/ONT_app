@@ -107,4 +107,33 @@ class ONTController extends Controller
             ]);
         }
     }
+
+    public function showONT($id_ont)
+    {
+        $ont = Ont::where('id_ont', $id_ont)->get();
+        return response()->json($ont);
+    }
+
+    public function updateONT(Request $request)
+    {
+        $ont = Ont::where('id_ont', $request->id_ont)
+            ->update([
+                    'ip_address_ont' => trim($request->ip_address),
+                    'sn_ont' => trim($request->sn_ont),
+                    'site_id' => trim($request->site_id),
+                    'type' => trim($request->type),
+                    'alamat' => trim($request->alamat),
+        ]);
+    
+        if($ont == true){
+            return response()->json([
+                'status'=>200
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>400
+            ]);
+        }
+    }
 }
