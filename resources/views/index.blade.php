@@ -24,6 +24,9 @@
     <!-- Animation -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 
+    <!-- moment js -->
+    <script type = "text/JavaScript" src = " https://MomentJS.com/downloads/moment.js"></script>
+
     <title>PT TELKOM INDONESIA || ONT</title>
   </head>
   <body>
@@ -172,6 +175,81 @@
       </div>
     </div>
 
+    <!-- Modal Detail ONT -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailModalLabel">Detail Data Optical Network Terminal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="ontDetailForm" class="ontDetailForm">
+              @csrf
+              <div class="row mb-3">
+                  <label for="id_ont" class="col-sm-4 col-form-label">#ID</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="id_ont_d">
+                  </div>
+              </div>  
+              <div class="row mb-3">
+                  <label for="ip_address" class="col-sm-4 col-form-label">IP Address</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="ip_address_d">
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="sn_ont" class="col-sm-4 col-form-label">Serial Number</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="sn_ont_d">
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="site_id" class="col-sm-4 col-form-label">Site ID</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="site_id_d">
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="type" class="col-sm-4 col-form-label">Tipe Produk</label>
+                  <div class="col-sm-8">
+                    <select class="form-select" id="type_d" disabled readonly aria-label="Tipe Produk" name="type">
+                      <option selected disabled>Pilih tipe produk</option>
+                      <option value="Astinet">Astinet</option>
+                      <option value="Metro E">Metro Ethernet</option>
+                      <option value="WiFi ID">WiFi ID</option>
+                      <option value="VPN">VPN</option>
+                    </select>
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="status" class="col-sm-4 col-form-label">Status</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="status_d">
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="alamat" class="col-sm-4 col-form-label">Alamat</label>
+                  <div class="col-sm-8">
+                    <textarea class="form-control" id="alamat_d" disabled readonly name="alamat" style="resize:none" rows="3"></textarea>
+                  </div>
+              </div> 
+              <div class="row mb-3">
+                  <label for="updated_at" class="col-sm-4 col-form-label">Last Update</label>
+                  <div class="col-sm-8">
+                      <input type="text" class="form-control" disabled readonly id="updated_at_d">
+                  </div>
+              </div> 
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              <!-- <button type="submit" class="btn btn-sm btn-danger">Update</button> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
@@ -223,7 +301,9 @@
                 render: function(data, type, row){
                   return `<a href="javascript:void(0)" type="button" onclick="editBtn(${row.id_ont})" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" id="editBtn">
                             <i class="fa-solid fa-pen-to-square"></i></a>
-                            <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" onclick="deleteBtn(${row.id_ont})"></i><a>`;
+                            <a class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" onclick="deleteBtn(${row.id_ont})"></i><a>
+                            <a href="javascript:void(0)" type="button" onclick="detailBtn(${row.id_ont})" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal" id="detailBtn">
+                            <i class="fa-solid fa-eye"></i></a>`;
                 }
               },
             ]
@@ -336,11 +416,41 @@
                 $('#sn_ont_e').val(response[0].sn_ont);
                 $('#site_id_e').val(response[0].site_id);
                 $('#type_e').val(response[0].type);
-                $('#alamat_e').val(response[0].alamat);
             }
           }
         });
       }
+
+      // show detail data ONT
+      function detailBtn(id_ont){
+        $.ajax({
+          url: '/ont/'+id_ont,
+          type: "GET",
+          success: function(response) {
+              if(response[0]) {
+                $('#id_ont_d').val(response[0].id_ont);
+                $('#ip_address_d').val(response[0].ip_address_ont);
+                $('#sn_ont_d').val(response[0].sn_ont);
+                $('#site_id_d').val(response[0].site_id);
+                $('#type_d').val(response[0].type);
+                $('#alamat_d').val(response[0].alamat);
+                $('#updated_at_d').val(moment(response[0].updated_at).utc().format('DD-MM-YYYY HH:mm:ss'));
+                
+                if(response[0].status == 0){
+                  $('#status_d').val("Offline");
+                }
+                else if(response[0].status == 1){
+                  $('#status_d').val("Online");
+                }
+                else{
+                  $('#status_d').val(response[0].status);
+                }
+                
+            }
+          }
+        });
+      }
+
       //submit update data ONT
       $('#ontEditForm').on('submit', function(e){
             e.preventDefault();
