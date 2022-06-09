@@ -31,21 +31,26 @@ class ONTController extends Controller
     protected function ping($ip){
         exec("ping -n 1 $ip", $output);
 
-        // if(!isset($output[2])){
-        //     pingTextInfo($output[0]);
-        // }
-        // else{
-        //     pingTextInfo($output[2]);
-        // }
+        if(!isset($output[2])){
+            $out['info'] = $output[0];
+        }
+        else{
+            $out['info'] = $output[2];
+        }
 
         $response = strtolower(implode(' ', $output));
-        $response = preg_match('/request timed out/', $response) || preg_match('/failure/i', $response) || preg_match('/host unreachable/i', $response) || preg_match('/could not find host/i', $response);
-        return $response;
+        $out['response'] = preg_match('/request timed out/', $response) || preg_match('/failure/i', $response) || preg_match('/host unreachable/i', $response) || preg_match('/could not find host/i', $response);
+        return $out;
     }
 
-    protected function pingTextInfo($output){
+    // public function pingTextInfo($output){
+    //     $ping_info = array();
+    //     array_push($ping_info, $output);
 
-    }
+    //     return response()->json([
+    //         'text' => $ping_info
+    //     ]);
+    // }
 
     protected function updateStatusONT($id_ont, $status){
         $query = Ont::where('id_ont', $id_ont)->update(['status' => $status]);
@@ -60,7 +65,9 @@ class ONTController extends Controller
 
     public function index(){
         $data = Ont::get();
+
         if(!empty($data)){
+            $info = array();
             foreach($data as $ont){
                 $id_ont = $ont['id_ont'];
                 $ip_ont = $ont['ip_address_ont'];
@@ -70,7 +77,8 @@ class ONTController extends Controller
                 $alamat = $ont['alamat'];
                 $last = $ont['updated_at'];
 
-                if($this->ping($ip_ont) == true){
+                $output = $this->ping($ip_ont);
+                if($output['response'] == true){
                     $status = 0;
                     if($this->updateStatusONT($id_ont, $status) > 0){
                         $text = <<<EOT
@@ -88,9 +96,10 @@ class ONTController extends Controller
                         $this->sendMessage($text);
                     }
                 }
-            }
+                array_push($info, $output['info']); 
+            }  
         }
-        return view('index');
+        return view('index', ['info'=>$info]);
     }
 
     public function getONT()

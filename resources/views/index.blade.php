@@ -71,9 +71,11 @@
                   <!-- Title -->
                   <h4 style="display: inline-block;">Terminal</h4>
                   <button class="btn btn-warning btn-sm float-end mb-3" onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></button>
-
+                  <hr style="color:red">
                   <!-- Konten -->
-
+                  @foreach($info as $i)
+                    <p style="font-size: 10px">{{$i}}</p>
+                  @endforeach 
                </div>
             </div>
          </div>
@@ -257,7 +259,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
       $(document).ready(function () {
-          sleep(2000).then(() => { readONT(); });
+          sleep(10).then(() => { readONT(); });
       });
 
       // put sleep
