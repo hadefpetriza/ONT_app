@@ -43,15 +43,6 @@ class ONTController extends Controller
         return $out;
     }
 
-    // public function pingTextInfo($output){
-    //     $ping_info = array();
-    //     array_push($ping_info, $output);
-
-    //     return response()->json([
-    //         'text' => $ping_info
-    //     ]);
-    // }
-
     protected function updateStatusONT($id_ont, $status){
         $query = Ont::where('id_ont', $id_ont)->update(['status' => $status]);
         return $query;
@@ -74,6 +65,7 @@ class ONTController extends Controller
                 $sn_ont = $ont['sn_ont'];
                 $site_id = $ont['site_id'];
                 $type = $ont['type'];
+                $status_ont = $ont['status'];
                 $alamat = $ont['alamat'];
                 $last = $ont['updated_at'];
 
@@ -89,11 +81,13 @@ class ONTController extends Controller
                 }
                 else{
                     $status = 1;
-                    if($this->updateStatusONT($id_ont, $status) > 0){
-                        $text = <<<EOT
-                        INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Online%0ALast Update : %0A$last
-                        EOT;
-                        $this->sendMessage($text);
+                    if($status_ont != $status){
+                        if($this->updateStatusONT($id_ont, $status) > 0){
+                            $text = <<<EOT
+                            INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Online%0ALast Update : %0A$last
+                            EOT;
+                            $this->sendMessage($text);
+                        }
                     }
                 }
                 array_push($info, $output['info']); 
