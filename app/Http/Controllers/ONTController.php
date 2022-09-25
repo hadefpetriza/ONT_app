@@ -74,7 +74,7 @@ class ONTController extends Controller
                     $status = 0;
                     if($this->updateStatusONT($id_ont, $status) > 0){
                         $text = <<<EOT
-                        INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Offline%0ALast Update : %0A$last
+                        INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Offline🛑%0ALast Update : %0A$last
                         EOT;
                         $this->sendMessage($text);
                     }
@@ -84,7 +84,7 @@ class ONTController extends Controller
                     if($status_ont != $status){
                         if($this->updateStatusONT($id_ont, $status) > 0){
                             $text = <<<EOT
-                            INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Online%0ALast Update : %0A$last
+                            INFORMASI ONT UP%0AIP Address : %0A$ip_ont%0ASerial Number : %0A$sn_ont%0ASite ID : %0A$site_id%0ATipe Layanan : %0A$type%0ALokasi ONT : %0A$alamat%0AStatus : %0ATo be Online🟢%0ALast Update : %0A$last
                             EOT;
                             $this->sendMessage($text);
                         }
