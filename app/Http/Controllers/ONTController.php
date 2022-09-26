@@ -50,8 +50,8 @@ class ONTController extends Controller
 
     protected function sendMessage($pesan){
         $id_bot = "1085134261";
-        $id_channel = "-1001671394161";
-        file_get_contents("https://api.telegram.org/bot5291921285:AAEclD2Kf8WZiV46eWYMiC6zYVApxs_YY68/sendMessage?chat_id=$id_channel&text=$pesan");
+        $id_channel = "-1001400850240";
+        file_get_contents("https://api.telegram.org/bot5602074181:AAHrnXCUT45NmjOoatMmLEakhdVHtDkLV7U/sendMessage?chat_id=$id_channel&text=$pesan");
     }
 
     public function index(){
