@@ -19,8 +19,13 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
+                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @can('admin')
+                            <li><a class="dropdown-item" href="{{ route('account.index') }}">Kelola Data User</a></li>
+                            @endcan
                             <li><a class="dropdown-item" href="{{ url('/logout') }}">Logout</a></li>
+
                         </ul>
                     </li>
 				</ul>

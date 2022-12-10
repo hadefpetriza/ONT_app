@@ -65,9 +65,9 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    <p class="fw-lighter fs-6">Don't have an account,
+                                    {{-- <p class="fw-lighter fs-6">Don't have an account,
                                         <span class="btn btn-link" href="{{ route('register') }}">{{ __('Register') }}</span>
-                                    </p>
+                                    </p> --}}
                                     <!-- @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                                 {{ __('Forgot Your Password?') }}

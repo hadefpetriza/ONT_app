@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ONTController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/account', [App\Http\Controllers\AdminController::class, 'index'])->name('account')->middleware('auth');
+
+Auth::routes();
+
+Route::resource('/account', App\Http\Controllers\AdminController::class)->except('show')->middleware('auth');
+
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [ONTController::class, 'home'])->name('home');
