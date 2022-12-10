@@ -418,6 +418,7 @@
                 $('#sn_ont_e').val(response[0].sn_ont);
                 $('#site_id_e').val(response[0].site_id);
                 $('#type_e').val(response[0].type);
+                $('#alamat_e').val(response[0].alamat);
             }
           }
         });

@@ -20,7 +20,7 @@
     <!-- Animation -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
 
-    <title>PT TELKOM INDONESIA</title>
+    <title>PT TELEKOMUNIKASI INDONESIA</title>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -29,7 +29,9 @@
     <!-- Carousel -->
     <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
 		<div class="carousel-indicators">
-			<button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
+			<button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button> 
+			<button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> 
+			<button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
 		</div>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
@@ -37,7 +39,7 @@
 				<div class="carousel-caption">
 					<h5 class="animated bounceInRight shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
 					<p class="animated bounceInLeft d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
-					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
+					<p class="animated bounceInRight" style="animation-delay: 3s"><a href="{{ route('ont.index') }}">Check It Out!</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
@@ -45,7 +47,7 @@
 				<div class="carousel-caption">
 					<h5 class="animated slideInDown shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
 					<p class="animated fadeInUp d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
-					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="{{ route('ont.index') }}">Check It Out!</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
@@ -53,7 +55,7 @@
 				<div class="carousel-caption">
 					<h5 class="animated zoomIn shadow-text" style="animation-delay: 1s">TELKOM WITEL SUMBAR</h5>
 					<p class="animated fadeInLeft d-none d-md-block shadow-text fw-normal" style="animation-delay: 2s">Website untuk memudahkan melakukan monitoring, mendetekesi ganguan layanan dan mendata semuan ONT yang digunakan oleh BGES Telkom WITEL SUMBAR</p>
-					<p class="animated zoomIn" style="animation-delay: 3s"><a href="#">Check It Out!</a></p>
+					<p class="animated zoomIn" style="animation-delay: 3s"><a href="{{ route('ont.index') }}">Check It Out!</a></p>
 				</div>
 			</div>
 		</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> <span class="visually-hidden">Previous</span></button> <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> <span class="visually-hidden">Next</span></button>

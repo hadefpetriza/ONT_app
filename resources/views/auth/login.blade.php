@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    
     <div class="d-none d-md-block ball login bg-danger bg-gradient position-absolute rounded-circle"></div>
     <div class="container login__form active">
         <div class="row vh-100 w-100 align-self-center">
@@ -65,14 +66,10 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    {{-- <p class="fw-lighter fs-6">Don't have an account,
+                                    <p class="fw-lighter fs-6">Don't have an account,
                                         <span class="btn btn-link" href="{{ route('register') }}">{{ __('Register') }}</span>
-                                    </p> --}}
-                                    <!-- @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
-                                            </a>
-                                        @endif -->
+                                    </p>
+
                                 </div>
                             </form>
                         </div>
